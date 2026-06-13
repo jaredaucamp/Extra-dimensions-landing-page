@@ -152,6 +152,15 @@
       position: fixed; inset: 0; z-index: -1; pointer-events: none;
       background: radial-gradient(ellipse 55% 60% at 65% 45%, rgba(255,204,0,.07) 0%, transparent 70%);
     }
+    @media (max-width: 860px) {
+      .hero-bg {
+        background:
+          radial-gradient(ellipse 80% 50% at 50% 0%, rgba(255,204,0,0.10) 0%, transparent 60%),
+          linear-gradient(rgba(255,204,0,0.04) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,204,0,0.04) 1px, transparent 1px);
+        background-size: auto, 40px 40px, 40px 40px;
+      }
+    }
 
     /* Social proof widget — sits above headline */
     .hero-proof-widget {
@@ -256,8 +265,65 @@
     .dev-node-gb { font-size: 9px; font-weight: 700; color: var(--yellow); }
 
     @media (max-width: 860px) {
-      .hero { grid-template-columns: 1fr; min-height: auto; padding-top: 88px; }
+      .hero { grid-template-columns: unset; min-height: unset; padding: 80px 0 48px; display: flex; flex-direction: column; gap: 24px; }
       .hero-visual { display: none; }
+    }
+
+    /* ── Mobile pool card (hero visual replacement) ──── */
+    .mobile-pool-card {
+      display: none;
+    }
+    @media (max-width: 860px) {
+      .mobile-pool-card {
+        display: block;
+        background: #1A1A1A;
+        border: 1px solid rgba(255,204,0,0.25);
+        border-radius: 16px;
+        padding: 20px;
+        position: relative;
+        overflow: hidden;
+      }
+      .mobile-pool-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #FFCC00, transparent);
+      }
+      .mpc-top {
+        display: flex; justify-content: space-between; align-items: center;
+        margin-bottom: 14px;
+      }
+      .mpc-label { font-size: 11px; font-weight: 700; color: var(--grey-2); text-transform: uppercase; letter-spacing: .08em; }
+      .mpc-live { display: flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 600; color: #4ade80; }
+      .mpc-live-dot { width: 6px; height: 6px; border-radius: 50%; background: #4ade80; animation: pulse 2s infinite; }
+      .mpc-center { text-align: center; padding: 8px 0 14px; }
+      .mpc-num { font-size: 56px; font-weight: 900; color: #FFCC00; letter-spacing: -.04em; line-height: 1; }
+      .mpc-unit { font-size: 20px; font-weight: 700; color: var(--grey-1); }
+      .mpc-cap { font-size: 11px; color: var(--grey-2); margin-top: 4px; }
+      .mpc-bar-wrap { margin-bottom: 14px; }
+      .mpc-bar-lbl { font-size: 11px; color: var(--grey-2); margin-bottom: 5px; }
+      .mpc-bar { height: 7px; background: var(--black-4); border-radius: 100px; overflow: hidden; }
+      .mpc-bar-fill { height: 100%; width: 68%; border-radius: 100px; background: linear-gradient(90deg, #FFCC00, #FFE566); }
+      .mpc-devices { display: flex; flex-direction: column; gap: 8px; }
+      .mpc-d-row {
+        display: flex; align-items: center; gap: 8px;
+        padding: 8px 10px;
+        background: rgba(255,255,255,.03);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+      }
+      .mpc-d-icon {
+        width: 24px; height: 24px; border-radius: 5px;
+        background: rgba(255,204,0,0.08); border: 1px solid rgba(255,204,0,0.25);
+        display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+      }
+      .mpc-d-icon svg { width: 12px; height: 12px; color: #FFCC00; }
+      .mpc-d-name { font-size: 12px; font-weight: 500; flex: 1; }
+      .mpc-d-gb { font-size: 11px; color: var(--grey-2); }
+      .mpc-sigs { display: flex; align-items: flex-end; gap: 1.5px; }
+      .mpc-sig { width: 3px; border-radius: 1px; background: var(--grey-2); }
+      .mpc-sig.on { background: #FFCC00; }
     }
 
     /* ════════════════════════════════════════════════════
@@ -555,9 +621,9 @@
       /* Trust bar and mobile quick CTA already appear early in DOM.
          Testimonials section also appears earlier in DOM than on desktop.
          So DOM order is already correct for mobile conversion funnel. */
-      .hero { padding-bottom: 48px; }
       .section-hdr, .faq-hdr { margin-bottom: 32px; }
       .testimonials, .explainer, .features, .why-us, .faq, .contact { padding: 56px 0; }
+      .hero h1 { color: #FFFFFF; }
     }
   </style>
 </head>
@@ -636,6 +702,42 @@
             Chat on WhatsApp
           </a>
         </div>
+        <!-- Mobile pool card — shown only on mobile (display:none on desktop) -->
+        <div class="mobile-pool-card reveal d3" aria-hidden="true">
+          <div class="mpc-top">
+            <span class="mpc-label">Business Data Pool</span>
+            <span class="mpc-live"><span class="mpc-live-dot"></span> Live</span>
+          </div>
+          <div class="mpc-center">
+            <span class="mpc-num">50</span><span class="mpc-unit"> GB</span>
+            <div class="mpc-cap">shared across your team</div>
+          </div>
+          <div class="mpc-bar-wrap">
+            <div class="mpc-bar-lbl">34 GB used</div>
+            <div class="mpc-bar"><div class="mpc-bar-fill"></div></div>
+          </div>
+          <div class="mpc-devices">
+            <div class="mpc-d-row">
+              <div class="mpc-d-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
+              <span class="mpc-d-name">Sipho (Sales)</span>
+              <span class="mpc-d-gb">12.1 GB</span>
+              <div class="mpc-sigs"><div class="mpc-sig on" style="height:4px;"></div><div class="mpc-sig on" style="height:7px;"></div><div class="mpc-sig on" style="height:10px;"></div><div class="mpc-sig on" style="height:13px;"></div></div>
+            </div>
+            <div class="mpc-d-row">
+              <div class="mpc-d-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
+              <span class="mpc-d-name">Priya (Accounts)</span>
+              <span class="mpc-d-gb">7.4 GB</span>
+              <div class="mpc-sigs"><div class="mpc-sig on" style="height:4px;"></div><div class="mpc-sig on" style="height:7px;"></div><div class="mpc-sig on" style="height:10px;"></div><div class="mpc-sig" style="height:13px;"></div></div>
+            </div>
+            <div class="mpc-d-row">
+              <div class="mpc-d-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
+              <span class="mpc-d-name">+5 more members</span>
+              <span class="mpc-d-gb">14.5 GB</span>
+              <div class="mpc-sigs"><div class="mpc-sig on" style="height:4px;"></div><div class="mpc-sig on" style="height:7px;"></div><div class="mpc-sig on" style="height:10px;"></div><div class="mpc-sig on" style="height:13px;"></div></div>
+            </div>
+          </div>
+        </div>
+
         <div class="hero-mtn-badge reveal d3">
           <div class="mtn-pip" aria-hidden="true">MTN</div>
           <span>Certified MTN Business Reseller, South Africa</span>
