@@ -1,0 +1,1741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Extra Dimensions offers a 50GB shared business data bundle for South African businesses. One pool, multiple staff devices. MTN certified reseller." />
+  <title>Extra Dimensions | 50GB Shared Business Data</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    /* ============================================================
+       TOKENS
+    ============================================================ */
+    :root {
+      --bg-base:       #080D1A;
+      --bg-surface:    #0E1629;
+      --bg-card:       #121E36;
+      --bg-card-hover: #172340;
+      --accent:        #2F80ED;
+      --accent-hover:  #1a6fd4;
+      --accent-glow:   rgba(47, 128, 237, 0.18);
+      --accent-subtle: rgba(47, 128, 237, 0.10);
+      --text-primary:  #F0F4FF;
+      --text-secondary:#8FA3C8;
+      --text-muted:    #4D6080;
+      --border:        rgba(255,255,255,0.07);
+      --border-accent: rgba(47, 128, 237, 0.30);
+      --radius-sm:     6px;
+      --radius-md:     12px;
+      --radius-lg:     20px;
+      --radius-xl:     28px;
+    }
+
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background-color: var(--bg-base);
+      color: var(--text-primary);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+    button { cursor: pointer; font-family: inherit; border: none; background: none; }
+    input, textarea, select { font-family: inherit; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* ============================================================
+       UTILITY
+    ============================================================ */
+    .container {
+      width: 100%;
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      padding: 5px 12px;
+      border: 1px solid var(--border-accent);
+      border-radius: 100px;
+      background: var(--accent-subtle);
+      margin-bottom: 20px;
+    }
+
+    /* Buttons */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #fff;
+      background: var(--accent);
+      border-radius: var(--radius-sm);
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      white-space: nowrap;
+    }
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(47,128,237,0.35);
+    }
+    .btn-primary:active { transform: translateY(0); }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-primary);
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      transition: border-color 0.2s, background 0.2s, transform 0.2s;
+      white-space: nowrap;
+    }
+    .btn-ghost:hover {
+      border-color: var(--accent);
+      background: var(--accent-subtle);
+      transform: translateY(-1px);
+    }
+
+    .btn-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #fff;
+      background: #25D366;
+      border-radius: var(--radius-sm);
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      white-space: nowrap;
+    }
+    .btn-whatsapp:hover {
+      background: #1ebe5d;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(37,211,102,0.30);
+    }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ============================================================
+       NAVIGATION
+    ============================================================ */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      background: rgba(8, 13, 26, 0.82);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.3s;
+    }
+    .nav.scrolled {
+      background: rgba(8, 13, 26, 0.96);
+    }
+    .nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .nav-logo-mark {
+      width: 36px;
+      height: 36px;
+      background: var(--accent);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .nav-logo-mark svg { width: 20px; height: 20px; fill: #fff; }
+    .nav-logo-text {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.1;
+    }
+    .nav-logo-sub {
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .nav-contact {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex: 1;
+      justify-content: flex-end;
+    }
+    .nav-phone {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: color 0.2s;
+    }
+    .nav-phone:hover { color: var(--text-primary); }
+    .nav-phone svg { width: 16px; height: 16px; flex-shrink: 0; }
+    .nav-wa-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: rgba(37,211,102,0.12);
+      border: 1px solid rgba(37,211,102,0.25);
+      border-radius: 50%;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .nav-wa-icon:hover { background: rgba(37,211,102,0.22); transform: scale(1.08); }
+    .nav-wa-icon svg { width: 18px; height: 18px; }
+    .nav-cta { padding: 10px 22px; font-size: 14px; }
+    @media (max-width: 600px) {
+      .nav-phone-text { display: none; }
+    }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    .hero {
+      min-height: 100dvh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      padding: 120px 0 80px;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 60% 40%, rgba(47,128,237,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 50% at 10% 80%, rgba(47,128,237,0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-grid-lines {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+      pointer-events: none;
+      opacity: 0.5;
+    }
+    .hero .container {
+      position: relative;
+      z-index: 1;
+    }
+    .hero-inner {
+      max-width: 760px;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border: 1px solid var(--border-accent);
+      border-radius: 100px;
+      background: var(--accent-subtle);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+      margin-bottom: 28px;
+    }
+    .hero-badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+    .hero-headline {
+      font-size: clamp(40px, 7vw, 72px);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      color: var(--text-primary);
+      margin-bottom: 24px;
+    }
+    .hero-headline .accent-word {
+      color: var(--accent);
+    }
+    .hero-subtext {
+      font-size: clamp(16px, 2.2vw, 19px);
+      color: var(--text-secondary);
+      line-height: 1.6;
+      max-width: 560px;
+      margin-bottom: 40px;
+    }
+    .hero-ctas {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .hero-data-visual {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: min(440px, 40vw);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+    .hero-ring-outer {
+      position: relative;
+      width: 340px;
+      height: 340px;
+    }
+    .hero-ring-circle {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 1px solid var(--border-accent);
+      animation: spin-slow 30s linear infinite;
+    }
+    .hero-ring-circle::before {
+      content: '';
+      position: absolute;
+      top: -4px;
+      left: 50%;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      transform: translateX(-50%);
+      box-shadow: 0 0 12px var(--accent);
+    }
+    .hero-ring-mid {
+      position: absolute;
+      inset: 40px;
+      border-radius: 50%;
+      border: 1px solid rgba(47,128,237,0.12);
+      animation: spin-slow 20s linear infinite reverse;
+    }
+    .hero-ring-center {
+      position: absolute;
+      inset: 80px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+    .hero-ring-gb {
+      font-size: 48px;
+      font-weight: 900;
+      color: var(--text-primary);
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+    .hero-ring-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    @keyframes spin-slow {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+    @media (max-width: 900px) {
+      .hero-data-visual { display: none; }
+      .hero-inner { max-width: 100%; }
+    }
+
+    /* ============================================================
+       EXPLAINER (What is 50GB Data Share)
+    ============================================================ */
+    .explainer {
+      padding: 100px 0;
+      background: var(--bg-surface);
+    }
+    .explainer .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .explainer-text h2 {
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+    .explainer-text p {
+      font-size: 16px;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      margin-bottom: 16px;
+    }
+    .explainer-steps {
+      margin-top: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .explainer-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .step-num {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--accent-subtle);
+      border: 1px solid var(--border-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-top: 2px;
+    }
+    .step-content strong { font-weight: 600; color: var(--text-primary); }
+    .step-content p { font-size: 14px; color: var(--text-secondary); margin: 0; }
+
+    .explainer-visual {
+      position: relative;
+    }
+    .pool-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    .pool-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+    }
+    .pool-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+    .pool-title { font-size: 13px; font-weight: 600; color: var(--text-muted); letter-spacing: 0.06em; text-transform: uppercase; }
+    .pool-badge { font-size: 11px; font-weight: 700; color: var(--accent); background: var(--accent-subtle); border: 1px solid var(--border-accent); padding: 3px 10px; border-radius: 100px; }
+    .pool-bar-wrap { margin-bottom: 24px; }
+    .pool-bar-label { display: flex; justify-content: space-between; font-size: 13px; color: var(--text-secondary); margin-bottom: 8px; }
+    .pool-bar {
+      height: 10px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+    .pool-bar-fill {
+      height: 100%;
+      border-radius: 100px;
+      background: linear-gradient(90deg, var(--accent), #60a5fa);
+      width: 68%;
+    }
+    .pool-devices {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .device-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+    }
+    .device-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      background: var(--accent-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .device-icon svg { width: 14px; height: 14px; color: var(--accent); }
+    .device-name { font-size: 13px; font-weight: 500; flex: 1; }
+    .device-used { font-size: 12px; color: var(--text-secondary); }
+    .device-dot { width: 6px; height: 6px; border-radius: 50%; background: #4ade80; flex-shrink: 0; }
+
+    @media (max-width: 860px) {
+      .explainer .container { grid-template-columns: 1fr; gap: 48px; }
+    }
+
+    /* ============================================================
+       FEATURE CARDS (Why Choose This Plan)
+    ============================================================ */
+    .features {
+      padding: 100px 0;
+    }
+    .features-header {
+      text-align: center;
+      max-width: 560px;
+      margin: 0 auto 64px;
+    }
+    .features-header h2 {
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    .features-header p {
+      font-size: 16px;
+      color: var(--text-secondary);
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 36px 32px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+    }
+    .feature-card:hover {
+      border-color: var(--border-accent);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    }
+    .feature-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(circle at 0% 0%, var(--accent-glow), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .feature-card:hover::after { opacity: 1; }
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: var(--accent-subtle);
+      border: 1px solid var(--border-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .feature-icon svg { width: 22px; height: 22px; color: var(--accent); }
+    .feature-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      letter-spacing: -0.01em;
+    }
+    .feature-card p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+    @media (max-width: 680px) {
+      .features-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ============================================================
+       DIFFERENTIATORS (Why Extra Dimensions)
+    ============================================================ */
+    .differentiators {
+      padding: 100px 0;
+      background: var(--bg-surface);
+    }
+    .diff-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .diff-left h2 {
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+    .diff-left p {
+      font-size: 16px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+    .mtn-badge {
+      margin-top: 36px;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+    }
+    .mtn-logo-placeholder {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #FFCC00, #FF6600);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 14px;
+      color: #000;
+      letter-spacing: 0.02em;
+    }
+    .mtn-badge-text strong {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .mtn-badge-text span {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+    .diff-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .diff-item {
+      display: flex;
+      gap: 20px;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .diff-item:last-child { border-bottom: none; }
+    .diff-check {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--accent-subtle);
+      border: 1px solid var(--border-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+    }
+    .diff-check svg { width: 16px; height: 16px; color: var(--accent); }
+    .diff-item-text strong { font-size: 15px; font-weight: 600; display: block; margin-bottom: 4px; }
+    .diff-item-text p { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+    @media (max-width: 860px) {
+      .diff-inner { grid-template-columns: 1fr; gap: 48px; }
+    }
+
+    /* ============================================================
+       TESTIMONIALS
+    ============================================================ */
+    .testimonials {
+      padding: 100px 0;
+    }
+    .testimonials-header {
+      text-align: center;
+      max-width: 500px;
+      margin: 0 auto 64px;
+    }
+    .testimonials-header h2 {
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    .testimonials-header p { font-size: 16px; color: var(--text-secondary); }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .testi-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .testi-card:hover {
+      border-color: var(--border-accent);
+      transform: translateY(-2px);
+    }
+    .testi-stars {
+      display: flex;
+      gap: 3px;
+    }
+    .star { color: #FBBF24; font-size: 14px; }
+    .testi-quote {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      flex: 1;
+    }
+    .testi-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+    .author-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--accent-subtle);
+      border: 2px solid var(--border-accent);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .author-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .author-name { font-size: 14px; font-weight: 600; }
+    .author-biz { font-size: 12px; color: var(--text-secondary); }
+    @media (max-width: 860px) {
+      .testimonials-grid { grid-template-columns: 1fr; }
+    }
+    @media (min-width: 500px) and (max-width: 860px) {
+      .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* ============================================================
+       FAQ
+    ============================================================ */
+    .faq {
+      padding: 100px 0;
+      background: var(--bg-surface);
+    }
+    .faq-inner {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .faq-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .faq-header h2 {
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    .faq-header p { font-size: 16px; color: var(--text-secondary); }
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+    }
+    .faq-question {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 22px 0;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-primary);
+      text-align: left;
+      transition: color 0.2s;
+    }
+    .faq-question:hover { color: var(--accent); }
+    .faq-icon {
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--accent-subtle);
+      border: 1px solid var(--border-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s, background 0.2s;
+    }
+    .faq-icon svg { width: 12px; height: 12px; color: var(--accent); transition: transform 0.3s; }
+    .faq-item.open .faq-icon { background: var(--accent); }
+    .faq-item.open .faq-icon svg { color: #fff; transform: rotate(45deg); }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.2s;
+    }
+    .faq-answer-inner {
+      padding-bottom: 20px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.75;
+    }
+
+    /* ============================================================
+       CONTACT / FINAL CTA
+    ============================================================ */
+    .contact-section {
+      padding: 100px 0;
+    }
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .contact-info h2 {
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    .contact-info p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 36px;
+    }
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      transition: color 0.2s;
+    }
+    .contact-link:hover { color: var(--text-primary); }
+    .contact-link svg { width: 16px; height: 16px; color: var(--accent); flex-shrink: 0; }
+    .contact-ctas {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .contact-form {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 40px;
+    }
+    .contact-form h3 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 28px;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+    .form-group.full { grid-column: 1 / -1; }
+    .form-group label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .form-group input,
+    .form-group select {
+      padding: 12px 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      font-size: 14px;
+      transition: border-color 0.2s, background 0.2s;
+      outline: none;
+    }
+    .form-group input::placeholder { color: var(--text-muted); }
+    .form-group input:focus,
+    .form-group select:focus {
+      border-color: var(--accent);
+      background: rgba(47,128,237,0.05);
+    }
+    .form-group select option { background: var(--bg-card); color: var(--text-primary); }
+    .form-submit {
+      margin-top: 24px;
+    }
+    .form-submit .btn-primary {
+      width: 100%;
+      justify-content: center;
+      padding: 15px;
+      font-size: 15px;
+    }
+    .form-note {
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 12px;
+    }
+    @media (max-width: 860px) {
+      .contact-inner { grid-template-columns: 1fr; gap: 48px; }
+    }
+    @media (max-width: 520px) {
+      .form-row { grid-template-columns: 1fr; }
+      .contact-form { padding: 28px 20px; }
+    }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    .footer {
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border);
+      padding: 60px 0 32px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+    .footer-brand .nav-logo { margin-bottom: 16px; }
+    .footer-brand p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      max-width: 280px;
+    }
+    .footer-col h4 {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+    .footer-col ul { display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a {
+      font-size: 13px;
+      color: var(--text-secondary);
+      transition: color 0.2s;
+    }
+    .footer-col ul li a:hover { color: var(--text-primary); }
+    .footer-bottom {
+      padding-top: 28px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .footer-copy { font-size: 12px; color: var(--text-muted); }
+    .footer-socials { display: flex; gap: 12px; }
+    .social-link {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .social-link:hover { border-color: var(--accent); background: var(--accent-subtle); }
+    .social-link svg { width: 15px; height: 15px; color: var(--text-secondary); }
+    .social-link:hover svg { color: var(--accent); }
+    @media (max-width: 720px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .footer-brand { grid-column: 1 / -1; }
+    }
+    @media (max-width: 460px) {
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ============================================================
+       SECTION HEADINGS - shared
+    ============================================================ */
+    h2 .text-accent { color: var(--accent); }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================================
+       NAVIGATION
+  ======================================================== -->
+  <nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
+    <div class="container">
+      <a href="#" class="nav-logo" aria-label="Extra Dimensions home">
+        <div class="nav-logo-mark" aria-hidden="true">
+          <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 2L3 6v8l7 4 7-4V6L10 2zm0 2.236L15.764 7.5 10 10.764 4.236 7.5 10 4.236zM4 9.118l5.5 3.146V17.4L4 14.236V9.118zm7.5 3.146L17 9.118v5.118L11.5 17.4v-5.136z"/>
+          </svg>
+        </div>
+        <div>
+          <div class="nav-logo-text">Extra Dimensions</div>
+          <div class="nav-logo-sub">Certified MTN Reseller</div>
+        </div>
+      </a>
+      <div class="nav-contact">
+        <a href="tel:0832129258" class="nav-phone" aria-label="Call us at 083 212 9258">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.09 2.2 2 2 0 012.08 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.16 7.86a16 16 0 006.84 6.84l1.23-1.23a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+          </svg>
+          <span class="nav-phone-text">083 212 9258</span>
+        </a>
+        <a href="https://wa.me/27601338237" class="nav-wa-icon" aria-label="Chat on WhatsApp" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="#25D366" aria-hidden="true">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+        </a>
+        <a href="#contact" class="btn-primary nav-cta">Get Started</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ========================================================
+       HERO
+  ======================================================== -->
+  <section class="hero" id="home" aria-label="Hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-grid-lines" aria-hidden="true"></div>
+    <div class="container">
+      <div class="hero-inner">
+        <div class="hero-badge reveal">
+          <span class="hero-badge-dot" aria-hidden="true"></span>
+          MTN Certified Business Partner
+        </div>
+        <h1 class="hero-headline reveal reveal-delay-1">
+          One data pool.<br>
+          <span class="accent-word">Your whole team</span> connected.
+        </h1>
+        <p class="hero-subtext reveal reveal-delay-2">
+          Stop paying for separate data plans per employee. Get 50GB of shared business data your whole team draws from, managed in one place.
+        </p>
+        <div class="hero-ctas reveal reveal-delay-3">
+          <a href="#contact" class="btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+            Pay Now
+          </a>
+          <a href="https://wa.me/27601338237" class="btn-whatsapp" target="_blank" rel="noopener">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+            Chat on WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-data-visual" aria-hidden="true">
+        <div class="hero-ring-outer">
+          <div class="hero-ring-circle"></div>
+          <div class="hero-ring-mid"></div>
+          <div class="hero-ring-center">
+            <div class="hero-ring-gb">50</div>
+            <div class="hero-ring-label">GB Shared</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       EXPLAINER
+  ======================================================== -->
+  <section class="explainer" id="how-it-works" aria-label="How shared data works">
+    <div class="container">
+      <div class="explainer-text">
+        <span class="section-label reveal">How It Works</span>
+        <h2 class="reveal">What is a 50GB <span class="text-accent">shared data</span> bundle?</h2>
+        <p class="reveal">Instead of buying individual data for each employee, your business gets one 50GB pool. Every staff member's SIM card draws from the same reserve, so nobody on your team runs dry while others have unused gigabytes sitting idle.</p>
+        <p class="reveal">You see everything in one place: total usage, who used what, and how much is left. No more juggling ten different accounts or chasing airtime receipts.</p>
+        <div class="explainer-steps">
+          <div class="explainer-step reveal">
+            <div class="step-num" aria-hidden="true">1</div>
+            <div class="step-content">
+              <strong>Purchase the bundle</strong>
+              <p>One payment, one account, 50GB loaded onto the business pool.</p>
+            </div>
+          </div>
+          <div class="explainer-step reveal reveal-delay-1">
+            <div class="step-num" aria-hidden="true">2</div>
+            <div class="step-content">
+              <strong>SIMs are linked to the pool</strong>
+              <p>Each staff member's SIM card is connected to draw from your shared reserve.</p>
+            </div>
+          </div>
+          <div class="explainer-step reveal reveal-delay-2">
+            <div class="step-num" aria-hidden="true">3</div>
+            <div class="step-content">
+              <strong>Team stays connected</strong>
+              <p>Data is shared automatically. No transfers, no top-ups, no interruptions.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="explainer-visual reveal reveal-delay-1">
+        <div class="pool-card">
+          <div class="pool-header">
+            <span class="pool-title">Business Data Pool</span>
+            <span class="pool-badge">Active</span>
+          </div>
+          <div class="pool-bar-wrap">
+            <div class="pool-bar-label">
+              <span>34GB used</span>
+              <span>16GB remaining</span>
+            </div>
+            <div class="pool-bar" role="progressbar" aria-valuenow="68" aria-valuemin="0" aria-valuemax="100" aria-label="Data usage: 68%">
+              <div class="pool-bar-fill"></div>
+            </div>
+          </div>
+          <div class="pool-devices" aria-label="Connected devices">
+            <div class="device-row">
+              <div class="device-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </div>
+              <span class="device-name">Sipho (Field Sales)</span>
+              <span class="device-used">8.2 GB</span>
+              <div class="device-dot" aria-label="Online" title="Online"></div>
+            </div>
+            <div class="device-row">
+              <div class="device-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </div>
+              <span class="device-name">Priya (Accounts)</span>
+              <span class="device-used">6.7 GB</span>
+              <div class="device-dot" aria-label="Online" title="Online"></div>
+            </div>
+            <div class="device-row">
+              <div class="device-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </div>
+              <span class="device-name">Johan (Logistics)</span>
+              <span class="device-used">5.1 GB</span>
+              <div class="device-dot" aria-label="Online" title="Online"></div>
+            </div>
+            <div class="device-row">
+              <div class="device-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </div>
+              <span class="device-name">+3 more team members</span>
+              <span class="device-used">14 GB</span>
+              <div class="device-dot" aria-label="Online" title="Online"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       FEATURES (Why Choose This Plan)
+  ======================================================== -->
+  <section class="features" id="features" aria-label="Plan benefits">
+    <div class="container">
+      <div class="features-header">
+        <span class="section-label reveal">The Plan</span>
+        <h2 class="reveal">Why this bundle works for <span class="text-accent">your business</span></h2>
+        <p class="reveal">Four reasons business owners switch to a shared data bundle and never look back.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card reveal">
+          <div class="feature-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
+            </svg>
+          </div>
+          <h3>Meaningful cost savings</h3>
+          <p>Paying separately per employee adds up fast. A shared pool cuts your monthly data spend significantly. Unused data from one employee benefits everyone instead of expiring.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-1">
+          <div class="feature-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+            </svg>
+          </div>
+          <h3>No more mid-month outages</h3>
+          <p>When one person's data runs out, work stops. With a shared pool, the team keeps going. No emergency top-ups, no calls about data, no disrupted client meetings.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-2">
+          <div class="feature-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/>
+            </svg>
+          </div>
+          <h3>Simple to manage</h3>
+          <p>One account, one bill, one renewal. You control the pool without needing separate logins or juggling multiple accounts. Add or remove users without any hassle.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-3">
+          <div class="feature-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <h3>Backed by MTN</h3>
+          <p>This bundle runs on MTN's nationwide network. Your team gets reliable coverage across South Africa, whether they're in Johannesburg, Cape Town, or out in the field.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       DIFFERENTIATORS (Why Extra Dimensions)
+  ======================================================== -->
+  <section class="differentiators" id="about" aria-label="Why Extra Dimensions">
+    <div class="container">
+      <div class="diff-inner">
+        <div class="diff-left reveal">
+          <span class="section-label">Why Us</span>
+          <h2>A partner, not just a <span class="text-accent">SIM card seller</span></h2>
+          <p>Any reseller can sell you data. Extra Dimensions makes sure you're on the right plan, get activated fast, and have someone to call when something goes wrong.</p>
+          <div class="mtn-badge">
+            <div class="mtn-logo-placeholder" aria-label="MTN logo">MTN</div>
+            <div class="mtn-badge-text">
+              <strong>Certified MTN Reseller</strong>
+              <span>Official business partner, South Africa</span>
+            </div>
+          </div>
+        </div>
+        <div class="diff-list">
+          <div class="diff-item reveal">
+            <div class="diff-check" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+            </div>
+            <div class="diff-item-text">
+              <strong>Certified MTN reseller</strong>
+              <p>We're an authorised MTN business partner. Your account is legitimate, your SIMs are genuine, and your service is backed by MTN's support structure.</p>
+            </div>
+          </div>
+          <div class="diff-item reveal reveal-delay-1">
+            <div class="diff-check" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+            </div>
+            <div class="diff-item-text">
+              <strong>Dedicated support line</strong>
+              <p>You get a direct number. Not a call centre. When your team has a data issue, we respond fast because your business can't wait in a queue.</p>
+            </div>
+          </div>
+          <div class="diff-item reveal reveal-delay-2">
+            <div class="diff-check" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+            </div>
+            <div class="diff-item-text">
+              <strong>Fast activation</strong>
+              <p>Most businesses are live within 24 to 48 hours. Submit your details, pay, and your team's SIMs are connected. No back-and-forth, no lengthy processes.</p>
+            </div>
+          </div>
+          <div class="diff-item reveal reveal-delay-3">
+            <div class="diff-check" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+            </div>
+            <div class="diff-item-text">
+              <strong>Minimal admin required</strong>
+              <p>We handle the paperwork side. You provide basic business information; we take care of the RICA and account setup so you can focus on running your business.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       TESTIMONIALS
+  ======================================================== -->
+  <section class="testimonials" id="reviews" aria-label="Customer testimonials">
+    <div class="container">
+      <div class="testimonials-header">
+        <span class="section-label reveal">Reviews</span>
+        <h2 class="reveal">What business owners are saying</h2>
+        <p class="reveal">From construction to retail, South African businesses are cutting their data costs.</p>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testi-card reveal">
+          <div class="testi-stars" aria-label="5 out of 5 stars">
+            <span class="star" aria-hidden="true">&#9733;</span>
+            <span class="star" aria-hidden="true">&#9733;</span>
+            <span class="star" aria-hidden="true">&#9733;</span>
+            <span class="star" aria-hidden="true">&#9733;</span>
+            <span class="star" aria-hidden="true">&#9733;</span>
+          </div>
+          <p class="testi-quote">"We had six drivers each on their own data packages and the admin was killing us. Constant top-ups, guys running out mid-delivery. Since switching to the shared pool, I top up once a month and forget about it. Game changer for our logistics operation."</p>
+          <div class="testi-author">
+            <div class="author-avatar">
+              <img src="https://picsum.photos/seed/sipho-dlamini-sa/84/84" alt="Sipho Dlamini" loading="lazy" />
+            </div>
+            <div>
+              <div class="author-name">Sipho Dlamini</div>
+              <div class="author-biz">Owner, SD Freight Solutions, Gauteng</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card reveal reveal-delay-1">
+          <div class="testi-stars" aria-label="5 out of 5 stars">
+            <span class="star" aria-hidden="true">&#9733;</span>
+            <span class="star" aria-hidden="true">&#9733;</span>
+            <span class="star" aria-hidden="true">&#9733;</span>
+            <span class="star" aria-hidden="true">&#9733;</span>
+            <span class="star" aria-hidden="true">&#9733;</span>
+          </div>
+          <p class="testi-quote">"Extra Dimensions sorted us out within two days. I sent the details on WhatsApp, paid, and our accounts and sales teams were connected by the next morning. The pricing compared to what we were paying per SIM is significantly better."</p>
+          <div class="testi-author">
+            <div class="author-avatar">
+              <img src="https://picsum.photos/seed/priya-naidoo-durban/84/84" alt="Priya Naidoo" loading="lazy" />
+            </div>
+            <div>
+              <div class="author-name">Priya Naidoo</div>
+              <div class="author-biz">Director, Naidoo Office Supplies, KZN</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card reveal reveal-delay-2">
+          <div class="testi-stars" aria-label="5 out of 5 stars">
+            <span class="star" aria-hidden="true">&#9733;</span>
+            <span class="star" aria-hidden="true">&#9733;</span>
+            <span class="star" aria-hidden="true">&#9733;</span>
+            <span class="star" aria-hidden="true">&#9733;</span>
+            <span class="star" aria-hidden="true">&#9733;</span>
+          </div>
+          <p class="testi-quote">"My construction crew is always on site away from Wi-Fi. Before, I'd get calls constantly about data. Now with one shared bundle, everyone draws from the same pool and I've not had a single complaint in three months. Very professional service."</p>
+          <div class="testi-author">
+            <div class="author-avatar">
+              <img src="https://picsum.photos/seed/johan-vdm-cape/84/84" alt="Johan van der Merwe" loading="lazy" />
+            </div>
+            <div>
+              <div class="author-name">Johan van der Merwe</div>
+              <div class="author-biz">MD, Van der Merwe Construction, WC</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       FAQ
+  ======================================================== -->
+  <section class="faq" id="faq" aria-label="Frequently asked questions">
+    <div class="container">
+      <div class="faq-inner">
+        <div class="faq-header">
+          <span class="section-label reveal">FAQ</span>
+          <h2 class="reveal">Common questions</h2>
+          <p class="reveal">Answers to what business owners ask before they sign up.</p>
+        </div>
+        <div class="faq-list" role="list">
+
+          <div class="faq-item reveal" role="listitem">
+            <button class="faq-question" aria-expanded="false" aria-controls="faq-1">
+              How does data sharing actually work across multiple SIM cards?
+              <div class="faq-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </div>
+            </button>
+            <div class="faq-answer" id="faq-1" role="region">
+              <div class="faq-answer-inner">
+                Each staff member gets a SIM card that is registered to your business account. All those SIMs are linked to a single 50GB pool. When an employee uses data on their phone, it deducts from the shared balance. There are no individual caps per SIM by default. The 50GB is available to whoever needs it most.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item reveal" role="listitem">
+            <button class="faq-question" aria-expanded="false" aria-controls="faq-2">
+              How many staff members can share the 50GB?
+              <div class="faq-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </div>
+            </button>
+            <div class="faq-answer" id="faq-2" role="region">
+              <div class="faq-answer-inner">
+                There is no hard limit on the number of SIMs. Most of our business clients run between 3 and 15 users comfortably on 50GB per month. If your team is larger or your usage is heavier, we can advise on a higher-capacity bundle. Contact us and we will match you to the right option.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item reveal" role="listitem">
+            <button class="faq-question" aria-expanded="false" aria-controls="faq-3">
+              Is this a monthly contract or a once-off payment?
+              <div class="faq-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </div>
+            </button>
+            <div class="faq-answer" id="faq-3" role="region">
+              <div class="faq-answer-inner">
+                The 50GB data bundle is prepaid and renewed monthly. You pay for the bundle, your team uses it, and you renew when you need to. There is no long-term contract locking you in. You stay because it works, not because you signed a 24-month agreement.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item reveal" role="listitem">
+            <button class="faq-question" aria-expanded="false" aria-controls="faq-4">
+              What happens when the 50GB runs out before month end?
+              <div class="faq-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </div>
+            </button>
+            <div class="faq-answer" id="faq-4" role="region">
+              <div class="faq-answer-inner">
+                Data usage stops automatically. No surprise bills, no uncapped charges. You can purchase a top-up bundle at any time to keep your team connected, or wait until your next monthly renewal. We can also help you set usage alerts so you know when the pool is running low before it hits zero.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item reveal" role="listitem">
+            <button class="faq-question" aria-expanded="false" aria-controls="faq-5">
+              How do I get started? Is the process complicated?
+              <div class="faq-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </div>
+            </button>
+            <div class="faq-answer" id="faq-5" role="region">
+              <div class="faq-answer-inner">
+                Fill in the short form on this page or message us on WhatsApp. We will contact you within a few hours to confirm your details, handle the RICA process, and arrange payment. Most businesses are fully activated within 24 to 48 hours. No lengthy applications, no branch visits required.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item reveal" role="listitem">
+            <button class="faq-question" aria-expanded="false" aria-controls="faq-6">
+              Do employees need to use MTN SIMs, or can they keep their current numbers?
+              <div class="faq-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </div>
+            </button>
+            <div class="faq-answer" id="faq-6" role="region">
+              <div class="faq-answer-inner">
+                The data bundle works with MTN SIM cards linked to your business account. Employees who already have MTN numbers can have their SIMs registered to the pool without changing their number. For staff on other networks, we can issue MTN SIMs for data use. We walk you through the best setup for your specific situation.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       CONTACT / FINAL CTA
+  ======================================================== -->
+  <section class="contact-section" id="contact" aria-label="Get started">
+    <div class="container">
+      <div class="contact-inner">
+        <div class="contact-info">
+          <span class="section-label reveal">Get Started</span>
+          <h2 class="reveal">Ready to cut your <span class="text-accent">data costs?</span></h2>
+          <p class="reveal">Fill in the form and we will be in touch within a few hours. Or reach us directly on WhatsApp or by phone right now.</p>
+          <div class="contact-links reveal">
+            <a href="tel:0832129258" class="contact-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.09 2.2 2 2 0 012.08 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.16 7.86a16 16 0 006.84 6.84l1.23-1.23a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+              </svg>
+              083 212 9258
+            </a>
+            <a href="mailto:info@extra-dimensions.co.za" class="contact-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+              </svg>
+              info@extra-dimensions.co.za
+            </a>
+            <a href="https://extra-dimensions.co.za" class="contact-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
+              </svg>
+              extra-dimensions.co.za
+            </a>
+          </div>
+          <div class="contact-ctas reveal">
+            <a href="https://wa.me/27601338237" class="btn-whatsapp" target="_blank" rel="noopener">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
+              Chat on WhatsApp
+            </a>
+            <a href="tel:0832129258" class="btn-ghost">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.09 2.2 2 2 0 012.08 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.16 7.86a16 16 0 006.84 6.84l1.23-1.23a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+              </svg>
+              083 212 9258
+            </a>
+          </div>
+        </div>
+
+        <div class="contact-form reveal reveal-delay-1">
+          <h3>Request a callback</h3>
+          <form id="contactForm" novalidate aria-label="Contact form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Your name</label>
+                <input type="text" id="name" name="name" placeholder="Sipho Dlamini" autocomplete="name" required />
+              </div>
+              <div class="form-group">
+                <label for="business">Business name</label>
+                <input type="text" id="business" name="business" placeholder="SD Freight Solutions" autocomplete="organization" required />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="email">Email address</label>
+                <input type="email" id="email" name="email" placeholder="sipho@sdfreight.co.za" autocomplete="email" required />
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone number</label>
+                <input type="tel" id="phone" name="phone" placeholder="083 000 0000" autocomplete="tel" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="staff">Number of staff needing data</label>
+              <select id="staff" name="staff" required>
+                <option value="" disabled selected>Select range</option>
+                <option value="1-5">1 to 5 employees</option>
+                <option value="6-10">6 to 10 employees</option>
+                <option value="11-20">11 to 20 employees</option>
+                <option value="21+">More than 20 employees</option>
+              </select>
+            </div>
+            <div class="form-submit">
+              <button type="submit" class="btn-primary">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+                Pay Now / Submit Enquiry
+              </button>
+            </div>
+            <p class="form-note">We respond within a few hours during business hours. No spam, ever.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       FOOTER
+  ======================================================== -->
+  <footer class="footer" aria-label="Site footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="nav-logo" aria-label="Extra Dimensions home">
+            <div class="nav-logo-mark" aria-hidden="true">
+              <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 2L3 6v8l7 4 7-4V6L10 2zm0 2.236L15.764 7.5 10 10.764 4.236 7.5 10 4.236zM4 9.118l5.5 3.146V17.4L4 14.236V9.118zm7.5 3.146L17 9.118v5.118L11.5 17.4v-5.136z"/>
+              </svg>
+            </div>
+            <div>
+              <div class="nav-logo-text">Extra Dimensions</div>
+              <div class="nav-logo-sub">Certified MTN Reseller</div>
+            </div>
+          </a>
+          <p>South Africa's trusted MTN business partner. Helping businesses cut data costs and keep their teams connected since 2018.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="#features">Plan Benefits</a></li>
+            <li><a href="#about">Why Us</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#contact">Get Started</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="tel:0832129258">083 212 9258</a></li>
+            <li><a href="mailto:info@extra-dimensions.co.za">info@extra-dimensions.co.za</a></li>
+            <li><a href="https://wa.me/27601338237" target="_blank" rel="noopener">WhatsApp Us</a></li>
+            <li><a href="https://extra-dimensions.co.za">extra-dimensions.co.za</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; 2024 Extra Dimensions. All rights reserved. MTN is a registered trademark of MTN Group Limited.</p>
+        <div class="footer-socials" aria-label="Social media links">
+          <a href="#" class="social-link" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+          </a>
+          <a href="#" class="social-link" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a href="#" class="social-link" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================
+       JAVASCRIPT
+  ======================================================== -->
+  <script>
+    // Scroll-based nav shadow
+    const nav = document.getElementById('nav');
+    const navObserver = new IntersectionObserver(
+      ([entry]) => nav.classList.toggle('scrolled', !entry.isIntersecting),
+      { threshold: 0, rootMargin: '-72px 0px 0px 0px' }
+    );
+    const heroSection = document.querySelector('.hero');
+    if (heroSection) navObserver.observe(heroSection);
+
+    // Scroll reveal using IntersectionObserver (no window.scroll events)
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+    );
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const answer = item.querySelector('.faq-answer');
+        const isOpen = item.classList.contains('open');
+
+        // Close all
+        document.querySelectorAll('.faq-item.open').forEach(openItem => {
+          openItem.classList.remove('open');
+          openItem.querySelector('.faq-answer').style.maxHeight = '0';
+          openItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+        });
+
+        // Open clicked (if it wasn't already open)
+        if (!isOpen) {
+          item.classList.add('open');
+          answer.style.maxHeight = answer.scrollHeight + 'px';
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
+    // Contact form — basic client-side feedback
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+      contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const btn = contactForm.querySelector('button[type="submit"]');
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Sent! We will be in touch.';
+        btn.style.background = '#16a34a';
+        btn.disabled = true;
+        setTimeout(() => {
+          btn.innerHTML = originalText;
+          btn.style.background = '';
+          btn.disabled = false;
+          contactForm.reset();
+        }, 4000);
+      });
+    }
+  </script>
+</body>
+</html>
