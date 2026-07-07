@@ -137,6 +137,7 @@ function ReminderRow({ reminder, onToggle, overdue }) {
         </p>
         <p className={`text-xs ${overdue ? 'text-[#D64545]' : 'text-gray-400'}`}>
           {formatDate(reminder.dueDate)}
+          {reminder.dueTime && ` · ${reminder.dueTime}`}
         </p>
       </div>
     </label>

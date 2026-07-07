@@ -5,14 +5,14 @@ import { toDateStr } from '../../lib/format'
 
 export default function AddReminderForm({ onDone, onCancel }) {
   const { addReminder } = useData()
-  const [form, setForm] = useState({ text: '', dueDate: toDateStr(new Date()) })
+  const [form, setForm] = useState({ text: '', dueDate: toDateStr(new Date()), dueTime: '' })
 
   const update = (key) => (e) => setForm((f) => ({ ...f, [key]: e.target.value }))
 
   const submit = (e) => {
     e.preventDefault()
     if (!form.text.trim()) return
-    addReminder(form)
+    addReminder({ ...form, dueTime: form.dueTime || null })
     onDone()
   }
 
@@ -27,9 +27,14 @@ export default function AddReminderForm({ onDone, onCancel }) {
           autoFocus
         />
       </Field>
-      <Field label="Due date">
-        <Input type="date" value={form.dueDate} onChange={update('dueDate')} required />
-      </Field>
+      <div className="grid grid-cols-2 gap-3">
+        <Field label="Due date">
+          <Input type="date" value={form.dueDate} onChange={update('dueDate')} required />
+        </Field>
+        <Field label="Due time (optional)">
+          <Input type="time" value={form.dueTime} onChange={update('dueTime')} />
+        </Field>
+      </div>
       <ModalActions onCancel={onCancel} submitLabel="Add reminder" />
     </form>
   )
