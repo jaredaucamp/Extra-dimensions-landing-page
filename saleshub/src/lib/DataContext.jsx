@@ -44,7 +44,7 @@ export function DataProvider({ children }) {
   }
 
   const addReminder = (reminder) => {
-    const newReminder = { id: nextId('r'), done: false, ...reminder }
+    const newReminder = { id: nextId('r'), done: false, notes: '', ...reminder }
     setReminders((prev) => [...prev, newReminder])
     return newReminder
   }
@@ -53,6 +53,14 @@ export function DataProvider({ children }) {
     setReminders((prev) =>
       prev.map((r) => (r.id === id ? { ...r, done: !r.done } : r))
     )
+  }
+
+  const updateMeeting = (id, patch) => {
+    setMeetings((prev) => prev.map((m) => (m.id === id ? { ...m, ...patch } : m)))
+  }
+
+  const updateReminder = (id, patch) => {
+    setReminders((prev) => prev.map((r) => (r.id === id ? { ...r, ...patch } : r)))
   }
 
   const addClient = (client) => {
@@ -80,8 +88,10 @@ export function DataProvider({ children }) {
       reminders,
       dailyNotes,
       addMeeting,
+      updateMeeting,
       addEarning,
       addReminder,
+      updateReminder,
       toggleReminder,
       addClient,
       saveDailyNote,

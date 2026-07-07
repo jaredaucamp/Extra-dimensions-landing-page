@@ -1,10 +1,11 @@
 import { useMemo, useState } from 'react'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Plus } from 'lucide-react'
 import { useData } from '../lib/DataContext'
 import { formatDate, parseDate, toDateStr } from '../lib/format'
 import { MEETING_TYPES } from '../lib/constants'
 import Card from '../components/Card'
 import MeetingRow from '../components/MeetingRow'
+import QuickAddModal from '../components/QuickAddModal'
 
 const WEEKDAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 const MONTH_NAMES = [
@@ -30,6 +31,7 @@ export default function CalendarPage() {
   const todayDate = parseDate(today)
   const [viewDate, setViewDate] = useState(new Date(todayDate.getFullYear(), todayDate.getMonth(), 1))
   const [selectedDate, setSelectedDate] = useState(today)
+  const [quickAddOpen, setQuickAddOpen] = useState(false)
 
   const meetingsByDate = useMemo(() => {
     const map = {}
@@ -125,9 +127,17 @@ export default function CalendarPage() {
       </Card>
 
       <Card className="p-5">
-        <h2 className="text-sm font-semibold text-[#1a1a1a] mb-1">
-          {formatDate(selectedDate, { withWeekday: true })}
-        </h2>
+        <div className="flex items-center justify-between mb-1">
+          <h2 className="text-sm font-semibold text-[#1a1a1a]">
+            {formatDate(selectedDate, { withWeekday: true })}
+          </h2>
+          <button
+            onClick={() => setQuickAddOpen(true)}
+            className="flex items-center gap-1 text-xs font-medium text-[#378ADD] hover:text-[#2f78c2] transition-colors"
+          >
+            <Plus size={14} /> Add
+          </button>
+        </div>
         {selectedMeetings.length === 0 ? (
           <p className="text-sm text-gray-400 py-6 text-center">No meetings on this day.</p>
         ) : (
@@ -138,6 +148,18 @@ export default function CalendarPage() {
           </div>
         )}
       </Card>
+
+      <button
+        onClick={() => setQuickAddOpen(true)}
+        aria-label="Quick add"
+        className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-30 flex items-center justify-center w-14 h-14 rounded-full bg-[#378ADD] text-white shadow-lg hover:bg-[#2f78c2] active:scale-95 transition-all"
+      >
+        <Plus size={26} />
+      </button>
+
+      {quickAddOpen && (
+        <QuickAddModal onClose={() => setQuickAddOpen(false)} defaultMeetingDate={selectedDate} />
+      )}
     </div>
   )
 }

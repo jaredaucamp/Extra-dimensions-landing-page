@@ -49,12 +49,12 @@ export const earnings = [
 ]
 
 export const reminders = [
-  { id: 'r1', text: 'Send proposal to Lindiwe Dlamini', dueDate: '2026-07-08', dueTime: '10:00', done: false },
-  { id: 'r2', text: 'Follow up with Michael Botha on budget', dueDate: '2026-07-09', dueTime: null, done: false },
-  { id: 'r3', text: 'Call Sarah about renewal terms', dueDate: '2026-07-06', dueTime: '14:30', done: false },
-  { id: 'r4', text: 'Chase invoice payment from Naledi Khumalo', dueDate: '2026-07-04', dueTime: null, done: false },
-  { id: 'r5', text: 'Prepare quarterly review deck for Thabo', dueDate: '2026-07-10', dueTime: '09:00', done: false },
-  { id: 'r6', text: 'Send thank-you note to James Pretorius', dueDate: '2026-07-05', dueTime: null, done: true },
+  { id: 'r1', text: 'Send proposal to Lindiwe Dlamini', dueDate: '2026-07-08', dueTime: '10:00', notes: 'Include the case studies she asked for.', done: false },
+  { id: 'r2', text: 'Follow up with Michael Botha on budget', dueDate: '2026-07-09', dueTime: null, notes: '', done: false },
+  { id: 'r3', text: 'Call Sarah about renewal terms', dueDate: '2026-07-06', dueTime: '14:30', notes: '', done: false },
+  { id: 'r4', text: 'Chase invoice payment from Naledi Khumalo', dueDate: '2026-07-04', dueTime: null, notes: 'Second reminder, invoice sent 2 Jul.', done: false },
+  { id: 'r5', text: 'Prepare quarterly review deck for Thabo', dueDate: '2026-07-10', dueTime: '09:00', notes: '', done: false },
+  { id: 'r6', text: 'Send thank-you note to James Pretorius', dueDate: '2026-07-05', dueTime: null, notes: '', done: true },
 ]
 
 export const dailyNotes = [

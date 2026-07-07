@@ -20,7 +20,7 @@ const TITLES = {
   reminder: 'Add reminder',
 }
 
-export default function QuickAddModal({ onClose }) {
+export default function QuickAddModal({ onClose, defaultMeetingDate }) {
   const [step, setStep] = useState(null)
 
   if (!step) {
@@ -62,7 +62,11 @@ export default function QuickAddModal({ onClose }) {
       }
       onClose={onClose}
     >
-      <FormComponent onDone={onClose} onCancel={onClose} />
+      <FormComponent
+        onDone={onClose}
+        onCancel={onClose}
+        {...(step === 'meeting' ? { defaultDate: defaultMeetingDate } : {})}
+      />
     </Modal>
   )
 }

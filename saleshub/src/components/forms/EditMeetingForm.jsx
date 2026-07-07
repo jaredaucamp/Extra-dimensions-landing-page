@@ -1,18 +1,20 @@
 import { useState } from 'react'
-import { Field, Input, Select, ModalActions } from '../Modal'
-import { MEETING_TYPES } from '../../lib/constants'
+import { Field, Input, Select, Textarea, ModalActions } from '../Modal'
+import { MEETING_TYPES, OUTCOMES } from '../../lib/constants'
 import { useData } from '../../lib/DataContext'
-import { toDateStr } from '../../lib/format'
 
-export default function AddMeetingForm({ onDone, onCancel, defaultDate }) {
-  const { clients, addMeeting, today } = useData()
+export default function EditMeetingForm({ meeting, onDone, onCancel }) {
+  const { clients, updateMeeting } = useData()
   const [form, setForm] = useState({
-    title: '',
-    date: defaultDate || today || toDateStr(new Date()),
-    time: '09:00',
-    duration: 30,
-    type: 'client-call',
-    clientId: '',
+    title: meeting.title,
+    date: meeting.date,
+    time: meeting.time,
+    duration: meeting.duration,
+    type: meeting.type,
+    clientId: meeting.clientId || '',
+    outcome: meeting.outcome || 'none',
+    earning: meeting.earning || 0,
+    notes: meeting.notes || '',
   })
 
   const update = (key) => (e) => setForm((f) => ({ ...f, [key]: e.target.value }))
@@ -20,9 +22,10 @@ export default function AddMeetingForm({ onDone, onCancel, defaultDate }) {
   const submit = (e) => {
     e.preventDefault()
     if (!form.title.trim()) return
-    addMeeting({
+    updateMeeting(meeting.id, {
       ...form,
       duration: Number(form.duration),
+      earning: Number(form.earning) || 0,
       clientId: form.clientId || null,
     })
     onDone()
@@ -31,13 +34,7 @@ export default function AddMeetingForm({ onDone, onCancel, defaultDate }) {
   return (
     <form onSubmit={submit}>
       <Field label="Meeting title">
-        <Input
-          value={form.title}
-          onChange={update('title')}
-          placeholder="e.g. Proposal walkthrough"
-          required
-          autoFocus
-        />
+        <Input value={form.title} onChange={update('title')} required autoFocus />
       </Field>
       <div className="grid grid-cols-2 gap-3">
         <Field label="Date">
@@ -71,7 +68,29 @@ export default function AddMeetingForm({ onDone, onCancel, defaultDate }) {
           ))}
         </Select>
       </Field>
-      <ModalActions onCancel={onCancel} submitLabel="Add meeting" />
+      <div className="grid grid-cols-2 gap-3">
+        <Field label="Outcome">
+          <Select value={form.outcome} onChange={update('outcome')}>
+            {Object.keys(OUTCOMES).map((value) => (
+              <option key={value} value={value}>
+                {value === 'none' ? 'None' : OUTCOMES[value].label}
+              </option>
+            ))}
+          </Select>
+        </Field>
+        <Field label="Earning (R, optional)">
+          <Input type="number" min={0} step="0.01" value={form.earning} onChange={update('earning')} />
+        </Field>
+      </div>
+      <Field label="Notes">
+        <Textarea
+          rows={4}
+          value={form.notes}
+          onChange={update('notes')}
+          placeholder="What happened, what's next..."
+        />
+      </Field>
+      <ModalActions onCancel={onCancel} submitLabel="Save changes" />
     </form>
   )
 }

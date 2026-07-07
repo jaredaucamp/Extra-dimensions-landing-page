@@ -5,10 +5,11 @@ import { formatCurrency, formatDate, parseDate, startOfWeek } from '../lib/forma
 import Card from '../components/Card'
 import StatCard from '../components/StatCard'
 import MeetingRow from '../components/MeetingRow'
+import ReminderRow from '../components/ReminderRow'
 import QuickAddModal from '../components/QuickAddModal'
 
 export default function Dashboard() {
-  const { today, meetings, earnings, reminders, toggleReminder } = useData()
+  const { today, meetings, earnings, reminders } = useData()
   const [quickAddOpen, setQuickAddOpen] = useState(false)
 
   const todayDate = parseDate(today)
@@ -90,7 +91,7 @@ export default function Dashboard() {
                     <AlertCircle size={13} /> Overdue
                   </p>
                   {overdue.map((r) => (
-                    <ReminderRow key={r.id} reminder={r} onToggle={toggleReminder} overdue />
+                    <ReminderRow key={r.id} reminder={r} overdue />
                   ))}
                 </div>
               )}
@@ -100,7 +101,7 @@ export default function Dashboard() {
                     <Bell size={13} /> Upcoming
                   </p>
                   {upcoming.map((r) => (
-                    <ReminderRow key={r.id} reminder={r} onToggle={toggleReminder} />
+                    <ReminderRow key={r.id} reminder={r} />
                   ))}
                 </div>
               )}
@@ -119,27 +120,5 @@ export default function Dashboard() {
 
       {quickAddOpen && <QuickAddModal onClose={() => setQuickAddOpen(false)} />}
     </div>
-  )
-}
-
-function ReminderRow({ reminder, onToggle, overdue }) {
-  return (
-    <label className="flex items-start gap-2.5 cursor-pointer group">
-      <input
-        type="checkbox"
-        checked={reminder.done}
-        onChange={() => onToggle(reminder.id)}
-        className="mt-0.5 accent-[#378ADD]"
-      />
-      <div className="min-w-0">
-        <p className="text-sm text-[#1a1a1a] group-hover:text-[#378ADD] transition-colors">
-          {reminder.text}
-        </p>
-        <p className={`text-xs ${overdue ? 'text-[#D64545]' : 'text-gray-400'}`}>
-          {formatDate(reminder.dueDate)}
-          {reminder.dueTime && ` · ${reminder.dueTime}`}
-        </p>
-      </div>
-    </label>
   )
 }
