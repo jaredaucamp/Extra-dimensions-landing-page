@@ -5,6 +5,7 @@ import Modal from './Modal'
 import EditMeetingForm from './forms/EditMeetingForm'
 import { MEETING_TYPES } from '../lib/constants'
 import { useData } from '../lib/DataContext'
+import { formatTime } from '../lib/format'
 
 export default function MeetingRow({ meeting }) {
   const { clients } = useData()
@@ -25,7 +26,7 @@ export default function MeetingRow({ meeting }) {
             {client ? client.name : type.label}
           </p>
         </div>
-        <span className="text-xs text-gray-500 shrink-0">{meeting.time}</span>
+        <span className="text-xs text-gray-500 shrink-0">{formatTime(meeting.time)}</span>
         <div className="shrink-0 w-20 flex justify-end">
           <OutcomeTag outcome={meeting.outcome} />
         </div>

@@ -17,6 +17,15 @@ export function formatDayMonth(dateStr) {
   return `${d.getDate()} ${MONTHS[d.getMonth()]}`
 }
 
+// "14:30" -> "2:30 PM"
+export function formatTime(timeStr) {
+  if (!timeStr) return ''
+  const [h, m] = timeStr.split(':').map(Number)
+  const period = h >= 12 ? 'PM' : 'AM'
+  const hour12 = h % 12 || 12
+  return `${hour12}:${String(m).padStart(2, '0')} ${period}`
+}
+
 export function formatCurrency(amount) {
   const rounded = Math.round(amount)
   const formatted = rounded.toLocaleString('en-ZA').replace(/,/g, ' ')

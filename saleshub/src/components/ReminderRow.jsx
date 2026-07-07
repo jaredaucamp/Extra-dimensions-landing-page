@@ -2,7 +2,7 @@ import { useState } from 'react'
 import Modal from './Modal'
 import EditReminderForm from './forms/EditReminderForm'
 import { useData } from '../lib/DataContext'
-import { formatDate } from '../lib/format'
+import { formatDate, formatTime } from '../lib/format'
 
 export default function ReminderRow({ reminder, overdue }) {
   const { toggleReminder } = useData()
@@ -25,7 +25,7 @@ export default function ReminderRow({ reminder, overdue }) {
         </p>
         <p className={`text-xs ${overdue ? 'text-[#D64545]' : 'text-gray-400'}`}>
           {formatDate(reminder.dueDate)}
-          {reminder.dueTime && ` · ${reminder.dueTime}`}
+          {reminder.dueTime && ` · ${formatTime(reminder.dueTime)}`}
         </p>
         {reminder.notes && (
           <p className="text-xs text-gray-400 mt-0.5 truncate">{reminder.notes}</p>
