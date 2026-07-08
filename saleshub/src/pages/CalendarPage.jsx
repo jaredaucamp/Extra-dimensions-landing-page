@@ -5,6 +5,7 @@ import { formatDate, parseDate, toDateStr } from '../lib/format'
 import { MEETING_TYPES } from '../lib/constants'
 import Card from '../components/Card'
 import MeetingRow from '../components/MeetingRow'
+import ColourDot from '../components/ColourDot'
 import QuickAddModal from '../components/QuickAddModal'
 
 const WEEKDAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
@@ -51,6 +52,14 @@ export default function CalendarPage() {
     setViewDate((d) => new Date(d.getFullYear(), d.getMonth() + delta, 1))
   }
 
+  const goToToday = () => {
+    setViewDate(new Date(todayDate.getFullYear(), todayDate.getMonth(), 1))
+    setSelectedDate(today)
+  }
+
+  const isViewingCurrentMonth =
+    viewDate.getFullYear() === todayDate.getFullYear() && viewDate.getMonth() === todayDate.getMonth()
+
   const selectedMeetings = (meetingsByDate[selectedDate] || [])
     .slice()
     .sort((a, b) => a.time.localeCompare(b.time))
@@ -60,6 +69,14 @@ export default function CalendarPage() {
       <div className="flex items-center justify-between">
         <h1 className="text-xl font-semibold text-[#1a1a1a]">Calendar</h1>
         <div className="flex items-center gap-3">
+          {!isViewingCurrentMonth && (
+            <button
+              onClick={goToToday}
+              className="text-xs font-medium text-[#378ADD] hover:text-[#2f78c2] transition-colors px-2 py-1.5 rounded-lg border border-[#e5e5e3] bg-white hover:bg-gray-50"
+            >
+              Today
+            </button>
+          )}
           <button
             onClick={() => changeMonth(-1)}
             aria-label="Previous month"
@@ -93,7 +110,8 @@ export default function CalendarPage() {
             const isToday = dateStr === today
             const isSelected = dateStr === selectedDate
             const dayMeetings = meetingsByDate[dateStr] || []
-            const dots = dayMeetings.slice(0, 4)
+            const dots = dayMeetings.slice(0, 3)
+            const overflow = dayMeetings.length - dots.length
 
             return (
               <button
@@ -108,7 +126,7 @@ export default function CalendarPage() {
                   {d.getDate()}
                 </span>
                 {dots.length > 0 && (
-                  <span className="flex gap-0.5">
+                  <span className="flex items-center gap-0.5">
                     {dots.map((m) => (
                       <span
                         key={m.id}
@@ -118,11 +136,28 @@ export default function CalendarPage() {
                         }}
                       />
                     ))}
+                    {overflow > 0 && (
+                      <span
+                        className={`text-[9px] leading-none font-medium ${
+                          isSelected ? 'text-white' : 'text-gray-400'
+                        }`}
+                      >
+                        +{overflow}
+                      </span>
+                    )}
                   </span>
                 )}
               </button>
             )
           })}
+        </div>
+        <div className="flex flex-wrap gap-x-4 gap-y-1.5 justify-center mt-4 pt-3 border-t border-[#f0f0ee]">
+          {Object.values(MEETING_TYPES).map(({ label, colour }) => (
+            <span key={label} className="flex items-center gap-1.5 text-xs text-gray-500">
+              <ColourDot colour={colour} size={7} />
+              {label}
+            </span>
+          ))}
         </div>
       </Card>
 
